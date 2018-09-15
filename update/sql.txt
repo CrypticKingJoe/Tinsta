@@ -1,0 +1,9 @@
+ALTER TABLE `posts` ADD `is_story` INT NOT NULL DEFAULT '0' AFTER `embed_code`;
+
+CREATE TABLE IF NOT EXISTS `story_posts` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `post_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `time_created` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

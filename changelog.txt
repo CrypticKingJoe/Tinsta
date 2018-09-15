@@ -1,0 +1,18 @@
+-----NEW FEATURES------
+- Added Story features like facebook and instagram
+- Lazy loading of images
+- Settings to manage features
+- Ability to disable video upload, embed link, story
+- Added GIF support to embed photo feature
+- Added Inline post people suggestions
+- Improved user interest in explore posts and new option to use it user feed post lists
+- Added privacy for profile (Private profile), message
+- Added welcome email
+
+----BUG FIXES------
+--Fixed GIF image height on post page
+--Fixed Grid post when click use to do silent ajax link
+--Fixed issue with HTTPS
+--Fix issue with forgot email sending
+-- Fixed issue with follow mail
+--Fixed username issue, currently bad userrname members will need to be updated manually or deleted
