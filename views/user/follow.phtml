@@ -1,0 +1,6 @@
+<?php if(is_loggedin() and $user['id'] != get_userid()):?>
+    <a data-id="<?php echo $user['id']?>" href="" class=" <?php echo (is_following($user['id'])) ? '' : 'hide'?> btn  btn-sm btn-secondary unfollow-btn unfollow-btn-<?php echo $user['id']?>"><?php _lang('following')?></a>
+
+    <a  data-id="<?php echo $user['id']?>" href="" class=" <?php echo (is_following($user['id'])) ? 'hide' : ''?> btn btn-sm btn-primary follow-btn follow-btn-<?php echo $user['id']?> "><?php _lang('follow')?></a>
+
+<?php endif?>

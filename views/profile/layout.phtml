@@ -1,0 +1,78 @@
+<div id="profile-container">
+    <div class="head row">
+        <div class="col-md-3">
+            <a href="" class="avatar"><img src="<?php echo get_avatar(600,app()->profileUser)?>"/></a>
+        </div>
+        <div class="col-md-9">
+            <h3 ><?php echo app()->profileUser['full_name']?>
+                <?php echo view('main::user/badges', array('user' => app()->profileUser))?>
+                <?php if(config('show-point', true)):?>
+                    <span class="btn btn-sm btn-info" style="border-radius: 50px"> <?php echo app()->profileUser['point']?> <?php _lang('points')?> </span>
+                <?php endif?>
+                <?php if(profile_owner()):?>
+                    <a href="<?php echo url('settings')?>" class="btn btn-secondary ajax-link btn-sm"> <i  class="icons icon-pencil"></i> <?php _lang('edit-profile')?></a>
+                <?php endif?>
+                <?php if(!profile_owner()):?>
+                    <?php echo view('main::user/follow', array('user' => app()->profileUser))?>
+                <?php endif?>
+
+                <?php if(is_loggedin() and !profile_owner()):?>
+                    <span class="dropdown">
+                        <a href="" data-toggle="dropdown" class="btn btn-sm btn-secondary dropdown-toggle"><i class="icons icon-options-vertical"></i></a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a onclick="return do_report('user','<?php echo app()->profileId?>')" href="" class="dropdown-item"><?php _lang('report-user')?></a>
+                        <a onclick="return block_user('<?php echo app()->profileId?>')" href="" class="dropdown-item"><?php _lang('block-user')?></a>
+                        <?php if(can_receive_message(app()->profileId)):?>
+                            <a onclick="return open_message_dialog('<?php echo app()->profileId?>')" href="" class="dropdown-item"><?php _lang('send-message')?></a>
+                        <?php endif?>
+                    </div>
+                    </span>
+                <?php endif?>
+            </h3>
+
+            <ul class="nav">
+
+                <li class="nav-item">
+                    <a class="nav-link ajax-link" href="<?php echo profile_link(app()->profileUser)?>"><span><?php echo count_posts(app()->profileUser['id'])?> </span><?php _lang('posts')?></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link ajax-link" href="<?php echo profile_link(app()->profileUser, 'following')?>"><span> <?php echo count_follow(app()->profileUser['id'], true)?> </span> <?php _lang('following')?></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link ajax-link" href="<?php echo profile_link(app()->profileUser, 'followers')?>"><span><?php echo count_follow(app()->profileUser['id'], false)?> </span><?php _lang('followers')?></a>
+                </li>
+
+
+            </ul>
+
+            <p><?php echo app()->profileUser['bio']?></p>
+            <p><?php echo app()->profileUser['website']?></p>
+            <?php echo view('main::user/render-badges', array('user' => app()->profileUser))?>
+        </div>
+    </div>
+
+    <ul class="nav justify-content-center profile-menu">
+        <li class="nav-item">
+            <a class="nav-link ajax-link <?php echo (segment(1) == '') ? 'active' : null?>" href="<?php echo profile_link(app()->profileUser)?>"><?php _lang('posts')?></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link ajax-link <?php echo (segment(1) == 'following') ? 'active' : null?>" href="<?php echo profile_link(app()->profileUser, 'following')?>"><?php _lang('following')?></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link ajax-link <?php echo (segment(1) == 'followers') ? 'active' : null?>" href="<?php echo profile_link(app()->profileUser, 'followers')?>"><?php _lang('followers')?></a>
+        </li>
+
+        <?php if(profile_owner()):?>
+            <li class="nav-item">
+                <a class="nav-link ajax-link <?php echo (segment(1) == 'favourites') ? 'active' : null?>" href="<?php echo profile_link(app()->profileUser, 'favourites')?>"><?php _lang('favourites')?></a>
+            </li>
+        <?php endif?>
+
+    </ul>
+
+    <?php if(can_see_profile(app()->profileId) or profile_owner()):?>
+        <?php echo $content?>
+    <?php else:?>
+        <div class="alert alert-warning"><?php _lang('profile-is-private')?></div>
+    <?php endif?>
+</div>

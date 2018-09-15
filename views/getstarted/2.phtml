@@ -1,0 +1,29 @@
+<form action="" method="post" id="getstarted-step-2-form">
+    <div class="row" style="padding-top: 30px;padding-bottom: 30px">
+        <div class="col-md-11">
+            <h5><?php _lang('what-are-you-interested-in')?></h5>
+        </div>
+        <div class="col-md-1">
+            <button type="submit" style="position:relative;right:10px;display: block" class="btn btn-primary btn-sm"><?php _lang('continue')?></button>
+        </div>
+    </div>
+
+    <div class="row" style="padding: 0">
+        <div class="col-md-8">
+            <?php foreach(get_tags() as $tag):?>
+                <a data-id="<?php echo $tag['id']?>" class="badge tag-select tag-default badge-pill tags-lg" href="">
+                    <?php echo $tag['name']?> <i class=""></i>
+                </a>
+            <?php endforeach?>
+        </div>
+        <div class="col-md-4 no-padding">
+            <div class="tags-suggestion">
+                <input type="text" placeholder="<?php _lang('search-for-topics-you')?>" data-container="#tags-search-render" data-target="#getstarted-tag-target" class="form-control tag-input-general">
+                <div class="tags-dropdown" id="getstarted-tag-target"></div>
+            </div>
+            <div id="tags-search-render" style="margin-top: 20px">
+
+            </div>
+        </div>
+    </div>
+</form>

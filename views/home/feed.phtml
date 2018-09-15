@@ -1,0 +1,190 @@
+<div id="feeds-container" class="row" style="padding: 20px 0">
+    <div class="col-sm-12"><?php echo config('top_ads')?>
+        </div>
+
+    <div class="col-md-8">
+        <div class="pane row" id="placeholder-editor">
+            <div class="col-sm-2">
+                <img class="avatar" src="<?php echo get_avatar(200)?>"/>
+            </div>
+            <div class="col-sm-10" style="border-left: solid 1px #F1F1F1">
+                <ul class="nav nav-justified">
+                    <li class="nav-item"><a onclick="return show_post_editor('photo')" class="nav-link" href=""><img src="<?php echo url('assets/images/photo.png')?>"/><span><?php _lang('add-photo')?></span></a></li>
+                    <?php if(config('enable-link-embed', true)):?>
+                        <li class="nav-item"><a onclick="return show_post_editor('url')" class="nav-link" href=""><img src="<?php echo url('assets/images/link.png')?>"/><span><?php _lang('embed-link')?></span></a></li>
+                    <?php endif?>
+
+                    <?php if(config('enable-video-upload', true)):?>
+                        <li class="nav-item"><a onclick="return show_post_editor('video')" class="nav-link" href=""><img src="<?php echo url('assets/images/video.png')?>"/><span><?php _lang('upload-video')?></span></a></li>
+                    <?php endif?>
+                    <?php if(config('enable-stories', true)):?>
+                        <li class="nav-item"><a onclick="return show_post_editor('story')" class="nav-link" href=""><i style="font-size: 40px;display: block;margin: 4px 0;color: #19B5FE" class="icons icon-layers"></i><span><?php _lang('add-story')?></span></a></li>
+                    <?php endif?>
+
+                </ul>
+            </div>
+        </div>
+
+        <?php if(config('enable-stories', true)):?>
+            <div class="pane p-2 story-box clearfix" style="margin: 0">
+
+                <h6 class="titl">
+                    <?php _lang('stories')?>
+                    <span title="<?php _lang('stories-help-note')?>" class="tool-tip float-right"><i class="icons icon-question"></i></span>
+                </h6>
+                <div class="jcarousel-wrapper">
+                    <div id="stories" class="jcarousel" style="padding: 0 50px">
+                        <ul>
+                            <?php foreach(get_stories() as $story): $user = get_user($story['user_id'])?>
+                                <li><a title="<?php echo $user['full_name'].' '.lang('story')?>" onclick="return open_story('<?php echo $story['user_id']?>')" class="active tool-tip" style="background-image: url(<?php echo get_avatar(75, $user)?>);" href="#" ></a></li>
+                            <?php endforeach?>
+                            <li><a href="#" onclick="return false"></a></li>
+                            <li><a href="#" onclick="return false"></a></li>
+                            <li><a href="#" onclick="return false"></a></li>
+                            <li><a href="#" onclick="return false"></a></li>
+                            <li><a href="#" onclick="return false"></a></li>
+                            <li><a href="#" onclick="return false"></a></li>
+                            <li><a href="#" onclick="return false"></a></li>
+                        </ul>
+                    </div>
+
+                    <a href="#" class="jcarousel-control-prev">&lsaquo;</a>
+                    <a href="#" class="jcarousel-control-next">&rsaquo;</a>
+
+
+                </div>
+
+            </div>
+        <?php endif?>
+
+        <div id="posts-list" data-userid="" data-page="feed" data-types="list" data-offset="0" class="post-list">
+            <?php $posts = get_posts()?>
+            <?php if($posts):?>
+                <?php $i = 0; foreach($posts as $post):?>
+                    <?php echo view('main::post/each', array('post' => $post));?>
+                    <?php if($i == 1 and config('enable-inline-suggestion', true)):?>
+                        <?php $users = suggest_users(10)?>
+                        <?php if($users):?>
+                            <div class="pane">
+                                <div class="p-3">
+                                    <h6>
+                                        <?php _lang('follow-people')?>
+                                        <a href="<?php echo url('explore/people')?>"  class="ajax-link btn btn-secondary btn-sm float-right"><?php _lang('view-more')?></a>
+                                    </h6>
+
+                                    <div class="jcarousel-wrapper">
+                                        <div id="inline-people-suggestion" class="jcarousel" style="padding: 0">
+                                            <ul>
+                                                <?php foreach($users as $user):?>
+                                                    <li><?php echo view('main::user/display', array('user' => $user))?></li>
+                                                <?php endforeach?>
+
+                                            </ul>
+                                        </div>
+
+                                        <a href="#" class="jcarousel-control-prev">&lsaquo;</a>
+                                        <a href="#" class="jcarousel-control-next">&rsaquo;</a>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        <?php endif?>
+                        <?php endif?>
+                <?php $i++; endforeach?>
+            <?php else:?>
+                <div id="empty-post-content" style="text-align: center;padding: 40px  10px;font-size: 15px">
+                    <i class="icons icon-pie-chart" style="font-size: 50px;display: block;margin: 10px auto"></i>
+                    <?php _lang('no-posts-display')?>
+                </div>
+            <?php endif?>
+
+
+        </div>
+    </div>
+    <div class="col-md-4 feed-right" id="sidebar">
+        <div class="sidebar__inner" style="padding-bottom: 100px">
+
+            <div class="pane user-box">
+                <div class="m-4">
+                    <div class="media user-inline" style="border: none;padding: 0">
+                        <?php $user = get_user()?>
+                        <img style="width: 50px;height: 50px;border-radius: 100px" class="d-flex mr-3" src="<?php echo get_avatar(75)?>" >
+                        <div class="media-body">
+                            <a style="display: block" class="ajax-link" href="<?php echo profile_link($user)?>">
+                                <h6 class="mt-0"><strong>
+                                        <?php echo $user['username']?></strong>
+                                    <?php echo view('main::user/badges', array('user' => $user))?>
+                                </h6>
+                                <p><?php echo $user['full_name']?> </p>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <?php echo view('main::user/render-badges', array('user' => get_user()))?>
+                <?php if(user_completion_percent() < 100):?>
+                    <div class="user-completion">
+
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: <?php echo user_completion_percent()?>%;background: #4F4F4F" aria-valuenow="<?php echo user_completion_percent()?>" aria-valuemin="0" aria-valuemax="100"><?php echo user_completion_percent()?>%</div>
+                        </div>
+                    </div>
+                <?php else:?>
+                    <hr/>
+                <?php endif?>
+
+                <ul class="nav justify-content-center">
+                    <li><a class="nav-link ajax-link" href="<?php echo profile_link()?>"><span><strong><?php echo get_user()['point']?></strong></span> <?php _lang('points')?></a></li>
+                    <li><a class="nav-link ajax-link" href="<?php echo profile_link()?>"><span><strong><?php echo count_posts(get_userid())?></strong></span> <?php _lang('posts')?></a></li>
+                    <li><a class="nav-link ajax-link" href="<?php echo profile_link(null,'followers')?>"><span><strong><?php echo count_follow(get_userid(), false)?></strong></span> <?php _lang('followers')?></a></li>
+                    <li><a class="nav-link ajax-link" href="<?php echo profile_link(null, 'following')?>"><span><strong><?php echo count_follow(get_userid(), true)?></strong></span> <?php _lang('following')?></a></li>
+                </ul>
+            </div>
+
+            <?php if(config('show-top-members', true)):?>
+                <div class="pane">
+                    <div class="m-3">
+                        <h6><?php _lang('top-members')?></h6>
+                        <?php foreach(get_top_members() as $user):?>
+                            <a style="display: inline-block;margin: 2px" href="<?php echo profile_link($user)?>" class="tool-tip ajax-link" title="<?php echo $user['username']?> : <?php echo $user['point']?> <?php _lang('points')?>">
+                                <img style="width: 40px;height: 40px;border-radius: 100px" class="d-flex mr-3" src="<?php echo get_avatar(75, $user)?>" >
+                            </a>
+                        <?php endforeach?>
+                    </div>
+                </div>
+            <?php endif?>
+            <div class="" >
+                <?php $users = suggest_users(5)?>
+                <?php if($users):?>
+                    <div class="pane">
+                        <div class="m-3">
+                            <h6><?php _lang('suggested-people')?> <a href="<?php echo url('explore/people')?>" class="ajax-link float-right"><?php _lang('see-all')?></a></h6>
+
+                            <?php if($users):?>
+                                <?php foreach($users as $user):?>
+                                    <?php echo view('main::user/display-inline', array('user' => $user))?>
+                                <?php endforeach?>
+                            <?php endif?>
+                        </div>
+                    </div>
+                <?php endif?>
+
+                <?php if(config('side_ads', false)):?>
+                    <div class="pane">
+                        <?php echo config('side_ads', '')?>
+                    </div>
+                <?php endif?>
+
+                <a class="" href="<?php echo url('terms')?>"><?php _lang('terms-and-condition')?></a> |
+                <a class="" href="<?php echo url('privacy')?>"><?php _lang('privacy')?></a> |
+                <a class="" href="<?php echo url('about')?>"><?php _lang('about')?></a> |
+                <a  href="<?php echo url('developers')?>"><?php _lang('developers')?></a>
+                <?php _lang('copyright')?> © <?php echo date('Y')?> <?php echo config('site-title')?>. <?php _lang('all-right-reserved')?>
+            </div>
+        </div>
+
+    </div>
+</div>

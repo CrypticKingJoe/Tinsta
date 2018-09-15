@@ -1,0 +1,30 @@
+<a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="icons icon-options-vertical"></i></a>
+<div class="dropdown-menu dropdown-menu-right ">
+    <a href="<?php echo url('post/'.$post['id'])?>" class="dropdown-item ajax-link"><?php _lang('go-to-post')?></a>
+    <a href="" class="dropdown-item"><?php _lang('report-inappropriate')?></a>
+    <?php if(can_edit_post($post)):?>
+        <a data-toggle="modal" data-target="#caption-edit-modal-<?php echo $post['id']?>" href="" class="dropdown-item"><?php _lang('edit-post')?></a>
+        <a href="" onclick="return delete_post('<?php echo $post['id']?>')" class="dropdown-item"><?php _lang('delete-post')?></a>
+    <?php endif?>
+</div>
+<div class="modal fade edit-caption" id="caption-edit-modal-<?php echo $post['id']?>">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form action="" method="post" class="edit-caption-form" data-id="<?php echo $post['id']?>">
+                <div class="modal-header">
+                    <h5 class="modal-title"><?php _lang('edit-caption')?></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <textarea placeholder="<?php _lang('add-caption')?>"  class="form-control " id="" name="caption"><?php echo $post['caption']?></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary btn-sm"><?php _lang('save')?></button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

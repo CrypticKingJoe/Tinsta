@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
+    <title><?php echo $title?></title>
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo url(config('site-favicon', 'assets/images/favicon.png'))?>" />
+    <link rel="stylesheet" href="<?php echo url('assets/css/plugins.css')?>"/>
+    <link rel="stylesheet" href="<?php echo url("styles/".get_theme()."/css/style.css")?>"/>
+    <?php echo $header_content?>
+    <style>
+        body{
+            <?php if(config('body-background-image', '')):?>
+                background-image:url(<?php echo config('body-background-image', '')?>);
+            <?php endif?>
+            background-color:<?php echo config('body-background-color', '#FAFAFA')?> !important;
+        }
+        #header{
+            background: <?php echo config('header-background-color', 'white')?> !important;
+            color:  <?php echo config('header-text-color', '#484848')?> !important;
+        }
+
+        #header .nav-item > a, #header .navbar-brand {
+            color:  <?php echo config('header-text-color', '#484848')?> !important;
+        }
+        .btn-primary, .fab-button, .primary-color {
+            background-color:<?php echo config('primary-color', '#FF0000')?> !important;
+            border-color: <?php echo config('primary-color', '#FF0000')?> !important;;
+            color: white !important;
+        }
+        #header-nav .active {
+            border-color: <?php echo config('primary-color', '#FF0000')?> !important;;
+        }
+        .btn-primary:hover {
+            opacity: 0.8;
+        }
+        #homepage {
+            background-image:url(<?php echo config('homepage-background', 'styles/default/images/background.png')?>);
+        }
+    </style>
+    <?php if(config('google-analytic', '')):?>
+        <!-- Global Site Tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo config('google-analytic', '')?>"></script>
+        <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)};
+  gtag('js', new Date());
+
+  gtag('config', '<?php echo config('google-analytic', '')?>');
+</script>
+    <?php endif?>
+</head>
+<body class="<?php echo (selected_is_rtl()) ? 'rtl-layout':null?>" style="<?php echo (selected_is_rtl()) ? 'direction:rtl':null?>">

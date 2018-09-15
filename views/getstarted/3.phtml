@@ -1,0 +1,25 @@
+<div class="row" style="padding-top: 30px;padding-bottom: 30px">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <div class="pane p-3 clearfix">
+            <div class="float-left">
+                <h6 style="font-weight: bold"><?php _lang('welcome-to')?> <?php echo config('site-title','Tinsta')?></h6>
+                <p style="color: grey"><?php _lang('welcome-note')?></p>
+            </div>
+            <div class="float-right">
+                <a href="<?php echo url('getstarted?step=4')?>" class="btn btn-sm btn-primary "><?php _lang('continue')?></a>
+            </div>
+        </div>
+
+        <div class="pane p-3">
+
+            <?php $users = suggest_users(5)?>
+            <?php if($users):?>
+                <?php foreach($users as $user):?>
+                    <?php echo view('main::user/display-inline', array('user' => $user))?>
+                <?php endforeach?>
+            <?php endif?>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+</div>

@@ -1,0 +1,14 @@
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <div class="pane">
+            <?php $users = suggest_users(100)?>
+            <?php if($users):?>
+                <?php foreach($users as $user):?>
+                    <?php echo view('main::user/display-inline', array('user' => $user))?>
+                <?php endforeach?>
+            <?php endif?>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+</div>

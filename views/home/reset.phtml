@@ -1,0 +1,36 @@
+<div class="" style="padding-top: 40px">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="pane">
+
+                <form action="" method="post">
+                    <div class="m-4">
+
+                        <h5><?php _lang('reset-password')?></h5>
+                        <?php if($error):?>
+                            <div class="alert alert-danger"><?php echo $error?></div>
+                        <?php endif?>
+                        <?php if($success):?>
+                            <div class="alert alert-success"><?php echo $success?></div>
+                        <?php endif?>
+                        <div class="form-group">
+                            <label><?php _lang('new-password')?></label>
+                            <input type="password"  name="password" class="form-control"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label><?php _lang('confirm-new-password')?></label>
+                            <input type="password"  name="confirm" class="form-control"/>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-sm btn-primary"><?php _lang('submit')?></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>

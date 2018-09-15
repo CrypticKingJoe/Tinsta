@@ -1,0 +1,37 @@
+<h5><?PHP _lang('verification-requests')?></h5>
+<table class="table" id="dataTable">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th><?php _lang('user')?></th>
+        <th><?php _lang('name')?></th>
+        <th><?php _lang('message')?></th>
+        <th><?php _lang('photo')?></th>
+        <th><?php _lang('photo-id')?></th>
+        <th><?php _lang('options')?></th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach(get_verification_requests() as $request): $user = get_user($request['user_id']);?>
+        <tr>
+            <td><?php echo $request['id']?></td>
+            <td>
+                <a href="<?php echo profile_link($user)?>">
+                     <?php echo $user['username']?>
+                </a>
+            </td>
+            <td><?php echo $request['name']?></td>
+            <td><?php echo $request['message']?></td>
+            <td><img sr="<?php echo url($request['photo_1'])?>" style="width: 50px"/></td>
+            <td><img sr="<?php echo url($request['photo_2'])?>" style="width: 50px"/></td>
+            <td>
+                <div class="btn-group">
+                    <a class="btn btn-sm btn-success" href="<?php echo url('admin/requests?type=accept&id='.$request['id'])?>"><i class="icons icon-check"></i></a>
+                    <a class="btn btn-sm btn-danger" href="<?php echo url('admin/requests?type=decline&id='.$request['id'])?>"><i class="icons icon-close"></i></a>
+                </div>
+
+            </td>
+        </tr>
+    <?php endforeach?>
+    </tbody>
+</table>

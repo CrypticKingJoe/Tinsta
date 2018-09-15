@@ -1,0 +1,51 @@
+<form action="" method="post">
+
+    <h4><?php _lang('notifications')?></h4>
+    <?php if($message):?>
+        <div class="alert alert-success"><?php echo $message?></div>
+    <?php endif?>
+    <p><?php _lang('receive-site-notification-when')?> : </p>
+    <?php $privacy = get_user_privacy()?>
+
+    <div class="form-group row">
+        <label class="label col-sm-4"><?php _lang('someone-started-following-you')?></label>
+        <select class=" col-sm-2 form-control form-control-sm" name="val[follow_you]">
+            <option <?php echo ($privacy['follow-you'] == 1) ? 'selected' : null?> value="1"><?php _lang('yes')?></option>
+            <option  <?php echo ($privacy['follow-you'] == 0) ? 'selected' : null?>  value="0"><?php _lang('no')?></option>
+        </select>
+    </div>
+
+    <div class="form-group row">
+        <label class="label col-sm-4"><?php _lang('someone-comment-on-post')?></label>
+        <select class=" col-sm-2 form-control form-control-sm" name="val[comment-post]">
+            <option <?php echo ($privacy['comment-post'] == 1) ? 'selected' : null?> value="1"><?php _lang('yes')?></option>
+            <option  <?php echo ($privacy['comment-post'] == 0) ? 'selected' : null?>  value="0"><?php _lang('no')?></option>
+        </select>
+    </div>
+
+    <div class="form-group row">
+        <label class="label col-sm-4"><?php _lang('someone-like-post')?></label>
+        <select class=" col-sm-2 form-control form-control-sm" name="val[like-post]">
+            <option <?php echo ($privacy['like-post'] == 1) ? 'selected' : null?> value="1"><?php _lang('yes')?></option>
+            <option  <?php echo ($privacy['like-post'] == 0) ? 'selected' : null?>  value="0"><?php _lang('no')?></option>
+        </select>
+    </div>
+
+    <hr/>
+    <p><?php _lang('receive-email-notification-when')?> :</p>
+
+    <div class="form-group row">
+        <label class="label col-sm-4"><?php _lang('someone-started-following-you')?></label>
+        <select class=" col-sm-2 form-control form-control-sm" name="val[email-follow]">
+            <option <?php echo ($privacy['email-follow'] == 1) ? 'selected' : null?> value="1"><?php _lang('yes')?></option>
+            <option  <?php echo ($privacy['email-follow'] == 0) ? 'selected' : null?>  value="0"><?php _lang('no')?></option>
+        </select>
+    </div>
+
+    <hr/>
+
+    <div  style="padding: 10px; text-align: center">
+        <button class="btn btn-primary btn-sm"><?php _lang('save')?></button>
+    </div>
+
+</form>

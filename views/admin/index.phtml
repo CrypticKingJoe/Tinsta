@@ -1,0 +1,106 @@
+<h5><?php _lang('dashboard')?></h5>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="stat row">
+            <div class="col-sm-4">
+                <i class="icons icon-user"></i>
+            </div>
+            <div class="col-sm-6">
+                <div class="count"><?php echo count_users()?></div>
+                <div class=""><?php _lang('users')?></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="stat row">
+            <div class="col-sm-4">
+                <i class="icons icon-bubbles"></i>
+            </div>
+            <div class="col-sm-6">
+                <div class="count"><?php echo count_all_posts()?></div>
+                <div class=""><?php _lang('posts')?></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6">
+        <div class="stat row">
+            <div class="col-sm-4">
+                <i class="icons icon-bubble"></i>
+            </div>
+            <div class="col-sm-6">
+                <div class="count"><?php echo count_all_comments()?></div>
+                <div class=""><?php _lang('comments')?></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6">
+        <div class="stat row">
+            <div class="col-sm-4">
+                <i class="icons icon-heart"></i>
+            </div>
+            <div class="col-sm-6">
+                <div class="count"><?php echo count_all_likes()?></div>
+                <div class=""><?php _lang('likes')?></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6" id="site-overview-chart">
+        <script>
+        function get_site_chart_config() {
+                var config = {
+            type: 'doughnut',
+            data: {
+                datasets: [{
+                 			data: [
+                 			<?php echo count_users()?>,
+                 			 <?php echo count_all_posts()?>,
+                 			 <?php echo count_all_comments()?>,
+                 			 <?php echo count_all_likes()?>
+                 			 ],
+                 			backgroundColor: [
+                 				"#FF6600",
+                 				'#26C281',
+                 				'#663366',
+                 				'#CC9900'
+                 			]
+                 		}],
+
+                 		labels: [
+                        			"<?php _lang('users')?>",
+                        			"<?php _lang('posts')?>",
+                        			"<?php _lang('comments')?>",
+                        			"<?php _lang('likes')?>"
+                        		]
+            },
+            options: {
+                responsive: true,
+                legend: {
+                    position: 'bottom',
+                },
+                title: {
+                    display: true
+                },
+                animation: {
+                    animateScale: true,
+                    animateRotate: true
+                }
+            }};
+
+            return config;
+            }
+
+
+            </script>
+        <canvas width="400" height="400" style="width: 250px !important;height: 250px !important;"  id="site-overview-doughnut" class="" />
+    </div>
+    <div class="col-sm-6">
+        <h6 style="padding-top: 10px"><?php _lang('recent-users')?></h6>
+        <hr/>
+        <?php foreach(get_latest_members(5) as $user):?>
+            <?php echo view('main::user/display-inline', array('user' => $user))?>
+        <?php endforeach?>
+    </div>
+</div>

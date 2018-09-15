@@ -1,0 +1,108 @@
+<div id="homepage">
+    <div class="cover-bg"></div>
+    <div class="dropdown" id="home-language-switch">
+        <a href="" class="dropdown-toggle" data-toggle="dropdown"><?php echo get_current_lang_name()?></a>
+        <div class="dropdown-menu dropdown-menu-right">
+            <?php foreach(get_languages_list() as $key => $name):?>
+                <a href="<?php echo url('set/language?id='.$key)?>" class="dropdown-item"><?php echo $name?></a>
+            <?php endforeach?>
+
+        </div>
+    </div>
+    <div class="home-access-links">
+        <a onclick="return toggle_home_content('.home-login')" href="" class="btn btn-sm btn-default access-login-link <?php echo (!input('signup')) ? 'hide' : null?>"><?php _lang('login')?></a>
+        <a onclick="return toggle_home_content('.home-signup')" href="" class="btn btn-sm btn-default access-signup-link <?php echo (!input('login')) ? 'hide' : null?>"><?php _lang('signup')?></a>
+    </div>
+
+    <div id="home-content">
+        <img class="logo" src="<?php echo url(config('site-logo', 'assets/images/logo.png'))?>"/>
+        <p class="welcome-text"><?php _lang('welcome-text-note')?></p>
+
+        <div class="home-pane pane-1 <?php echo (input('login') or input('signup')) ? 'hide': null?>">
+            <a href="" onclick="return toggle_home_content('.home-signup')" class="btn btn-primary btn-lg btn-block"><?php _lang('get-started')?></a>
+            <a href="" onclick="return toggle_home_content('.home-login')" class="btn btn-default btn-lg btn-block"><?php _lang('login')?></a>
+        </div>
+        <div class="home-pane home-login <?php echo (!input('login')) ? 'hide' : null?>">
+            <form action="" id="login-form" method="post">
+                <div class="form-pane">
+                    <input type="text" name="username" placeholder="<?php _lang('username-email')?>" class="form-control"/>
+                    <input type="password" name="password" placeholder="<?php _lang('password')?>" class="form-control"/>
+                </div>
+
+                <?php
+                    $enableSocialAuth = false;
+                    foreach(array('facebook','twitter','instagram','google','vkontakte') as $type){
+                        if (config($type.'-enabled', false)) $enableSocialAuth = true;
+                    }
+
+                ?>
+                <?php if($enableSocialAuth):?>
+                    <div class="form-pane" id="social-auth-links">
+                        <?php if(config('facebook-enabled', false)):?>
+                            <a class="tool-tip" title="<?php _lang('login-with-facebook')?>" href="<?php echo url('social/auth/facebook')?>"><i class="icons icon-social-facebook"></i></a>
+                        <?php endif?>
+                        <?php if(config('google-enabled', false)):?>
+                            <a class="tool-tip" title="<?php _lang('login-with-google')?>" href="<?php echo url('social/auth/google')?>"><i class="icons icon-social-google"></i></a>
+                        <?php endif?>
+
+                        <?php if(config('twitter-enabled', false)):?>
+                            <a class="tool-tip" title="<?php _lang('login-with-twitter')?>" href="<?php echo url('social/auth/twitter')?>"><i class="icons icon-social-twitter"></i></a>
+                        <?php endif?>
+
+                        <?php if(config('instagram-enabled', false)):?>
+                            <a class="tool-tip" title="<?php _lang('login-with-instagram')?>" href="<?php echo url('social/auth/instagram')?>"><i class="icons icon-social-instagram"></i></a>
+                        <?php endif?>
+
+                        <?php if(config('vkontakte-enabled', false)):?>
+                            <a class="tool-tip" title="<?php _lang('login-with-vkontakte')?>" href="<?php echo url('social/auth/vkontakte')?>"><i class="icons icon-social-vkontakte"></i></a>
+                        <?php endif?>
+
+
+
+
+                    </div>
+                <?php endif?>
+                <button class="btn btn-primary  btn-block"><?php _lang('login')?></button>
+
+                <a href="<?php echo url('forgot-password')?>" class="home-forgot-link"><?php _lang('forgot-password')?></a>
+            </form>
+        </div>
+        <div class="home-pane home-signup <?php echo (!input('signup')) ? 'hide' : null?>">
+            <form id="signup-form" action="" method="post">
+                <div class="form-pane">
+                    <input type="text" required name="name" placeholder="<?php _lang('fullname')?>" class="form-control"/>
+                    <input type="text" required name="username" placeholder="<?php _lang('username')?>" class="form-control"/>
+                    <input type="email" required name="email" placeholder="<?php _lang('email-address')?>" class="form-control"/>
+                    <input type="password" required name="password" placeholder="<?php _lang('password')?>" class="form-control"/>
+                    <?php if(config('enable-recaptcha', 0)):?>
+                        <div class="g-recaptcha" data-sitekey="<?php echo config('captcha-site-key')?>" style="padding: 3px "></div>
+                    <?php endif?>
+                </div>
+                <button class="btn btn-primary  btn-block"><?php _lang('signup')?></button>
+            </form>
+        </div>
+    </div>
+    <div id="home-footer-links" class="clearfix">
+
+        <div class="float-left">
+            <nav class="nav">
+                <a class="nav-link active" href="<?php echo url('terms')?>"><?php _lang('terms-and-condition')?></a>
+                <a class="nav-link" href="<?php echo url('privacy')?>"><?php _lang('privacy')?></a>
+                <a class="nav-link" href="<?php echo url('about')?>"><?php _lang('about')?></a>
+                <a class="nav-link" href="<?php echo url('developers')?>"><?php _lang('developers')?></a>
+            </nav>
+        </div>
+        <div class="float-right">
+            <?php _lang('copyright')?> © <?php echo date('Y')?> <?php echo config('site-title')?>. <?php _lang('all-right-reserved')?>
+        </div>
+    </div>
+   <?php if(config('enable-latest-members', true)):?>
+       <div id="home-footer-members">
+
+           <?php foreach(get_latest_members(50) as $user):?>
+               <a href="<?php echo profile_link($user)?>"><img src="<?php echo get_avatar(75, $user)?>"/></a>
+           <?php endforeach?>
+
+       </div>
+    <?php endif?>
+</div>

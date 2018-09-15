@@ -1,0 +1,125 @@
+
+<div id="post-page-container" class="post-page-<?php echo $post['id']?>" style="<?php echo ($prev or $next) ? 'padding:20px 20px' : null?>">
+    <?php $user = get_user($post['user_id']);?>
+    <?php if($next):?>
+        <a class="nav-left" onclick="return view_post('<?php echo $next?>', true)" href=""><i class="icons icon-arrow-left"></i></a>
+    <?php endif?>
+
+    <?php if($prev):?>
+        <a class="nav-right" href="" onclick="return view_post('<?php echo $prev?>', true)"><i class="icons icon-arrow-right"></i></a>
+    <?php endif?>
+    <div class="pane row each-post">
+        <div class="col-md-7" style="padding: 0">
+            <div class="body">
+                <?php $images = perfectUnserialize($post['images']); if($images): ?>
+                    <div class="post-images single-post-images">
+                        <?php if(count($images) > 1):?>
+                            <a href="" class=" nav-btn nav-left"><i class="icon-arrow-left icons"></i></a>
+                        <?php endif?>
+                        <?php $i =0; foreach($images as $image):?>
+
+
+                                    <div onclick="return view_photo('<?php echo url($image)?>')" style="background-image:url(<?php echo url($image)?>) " class="image image-<?php echo $i?>"></div>
+
+
+
+                            <?php $i++; endforeach?>
+                        <?php if(count($images) > 1):?>
+                            <a href="" class="nav-btn nav-right"><i class="icon-arrow-right icons"></i></a>
+                        <?php endif?>
+                    </div>
+                <?php elseif($post['video']):?>
+                    <?php if($post['video_image']):?>
+                        <a data-id="<?php echo $post['id']?>" class="video-player-placeholder" style="background-image: url(<?php echo url($post['video_image'])?>)">
+                            <div class="detail">
+                                <i class="icons icon-control-play"></i>
+                            </div>
+                        </a>
+                    <?php else: //complete embed of player?>
+                        <video poster="" controls>
+                            <source src="<?php echo url($post['video'])?>" type="video/mp4">
+                        </video>
+                    <?php endif?>
+                <?php else:?>
+                    <?php if($post['code_type'] == 'video' and $post['video_image']):?>
+                        <a data-id="<?php echo $post['id']?>" class="video-player-placeholder" style="background-image: url(<?php echo url($post['video_image'])?>)">
+                            <div class="detail">
+                                <i class="icons icon-control-play"></i>
+                            </div>
+                        </a>
+                    <?php else:?>
+                        <?php if($post['code_type'] == 'photo'):?>
+                            <img onclick="return view_photo('<?php echo url($post['video_image'])?>')" style="max-width: 100%" src="<?php echo url($post['video_image'])?>"/>
+                        <?php else:?>
+                            <?php echo $post['embed_code']?>
+                        <?php endif?>
+                    <?php endif?>
+                <?php endif?>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="head clearfix">
+                <a class="ajax-link float-left" href="<?php echo profile_link($user)?>">
+                    <?php if(selected_is_rtl()):?>
+                        <span><?php echo $user['full_name']?></span>
+                    <?php endif?>
+                    <img src="<?php echo get_avatar(200, $user)?>"/>
+                    <?php if(!selected_is_rtl()):?>
+                        <span><?php echo $user['full_name']?></span>
+                    <?php endif?>
+                </a>
+            </div>
+            <div class="foot">
+                <div class="post-like-container clearfix">
+                    <div class="float-left">
+                        <ul class="nav">
+                            <li class="nav-item">
+                                <a data-id="<?php echo $post['id']?>" class="nav-link active like-btn <?php echo has_liked($post['id'])? 'liked' : null?>" href="#"><i class="icons icon-heart"></i></a>
+                            </li>
+                            <li class="nav-item">
+                                <a data-id="<?php echo $post['id']?>" class="nav-link post-comment-btn" href="#"><i class="icons icon-bubble"></i></a>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="float-right">
+                        <ul class="nav">
+                            <li class="nav-item">
+                                <a title="<?php _lang('add-to-favourites')?>" style="color: grey"  data-id="<?php echo $post['id']?>"  class="nav-link active favourite-btn tool-tip <?php echo (has_favourite($post['id'])) ? 'favourite' : null?>" href="#"><i class="icons icon-star"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <span class="likes-count" style="font-weight: bold"><span class="likes-count-<?php echo $post['id']?>" ><?php echo count_likes($post['id'])?></span> <?php _lang('likes')?></span>
+                <div class="caption <?php echo (!$post['caption']) ? 'hide' : null?>">
+                    <strong><?php echo $user['username']?></strong> <span class="caption-<?php echo $post['id']?>"><?php echo output_text($post['caption'])?></span>
+                </div>
+                <?php echo view('main::post/tags', array('post' => $post))?>
+                <div class="post-time" style="font-size: 12px;color: grey;margin-top: 5px"><?php echo format_time($post['date_created'])?></div>
+                <div class="comments">
+                    <?php if(count_comments($post['id']) > config('comment-per-page', 5)):?>
+                        <a class="load-more-comment" data-id="<?php echo $post['id']?>" data-offset="0" href="" style="display: block;margin: 10px 0"><?php _lang('load-more-comments')?></a>
+                    <?php endif?>
+                    <div style="height: 250px;overflow: auto" class="comments-list comments-lists-<?php echo $post['id']?>">
+
+                        <?php foreach(array_reverse(get_comments($post['id'])) as $comment):?>
+                            <?php echo view('main::post/comment', array('comment' => $comment))?>
+                        <?php endforeach?>
+                    </div>
+                    <div class="comment-form clearfix">
+
+                        <div class="float-left">
+                            <form data-id="<?php echo $post['id']?>" class="clearfix comment-form-<?php echo $post['id']?>" action="" method="post">
+                                <input placeholder="<?php _lang('add-a-comment')?>" type="text" name="comment" class="form-control"/>
+                            </form>
+                        </div>
+                        <div class="float-right dropup">
+                            <?php echo view('main::post/menu', array('post' => $post))?>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,79 @@
+<div id="messages-list-container">
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+            <?php _lang('direct-messages')?>
+
+        </h5>
+
+        <button onclick="return show_new_message()" class="btn btn-sm btn-primary " id="new-message-btn">
+            <i class="icons icon-pencil"></i> <?php _lang('new-message')?></button>
+        <button onclick="return close_message_dialog()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <?php $conversations = get_conversation_list()?>
+        <?php if($conversations):?>
+            <?php foreach($conversations as $user):?>
+        <a style="display: block;color:black !important;" onclick="return open_message_dialog('<?php echo $user['id']?>', true)" class="" href="">
+                <div class="media user-inline">
+
+                    <img style="width: 50px;height: 50px;border-radius: 100px" class="d-flex mr-3" src="<?php echo get_avatar(75, $user)?>" >
+                    <div class="media-body">
+
+                            <h6 class="mt-0"><strong>
+                                    <?php echo $user['username']?></strong>
+                                <?php echo view('main::user/badges', array('user' => $user))?>
+                            </h6>
+                            <p><?php echo $user['last_message']['message']?> </p>
+
+                    </div>
+
+                    <div class="action">
+                        <?php $count = count_unread_messages($user['cid']);?>
+                        <?php if($count):?>
+                            <span class="badge badge-danger"><?php echo $count?></span>
+                        <?php endif?>
+                        <?php echo format_time($user['last_message']['date_created'])?>
+                    </div>
+                </div>
+        </a>
+                <?php endforeach?>
+        <?php else:?>
+        <div style="text-align: center;padding: 40px  10px;font-size: 15px">
+            <i class="icons icon-pie-chart" style="font-size: 50px;display: block;margin: 10px auto"></i>
+            <?php _lang('no-messages-yet')?>
+        </div>
+        <?php endif?>
+    </div>
+    <div class="modal-footer"></div>
+</div>
+<div id="new-message-container" style="display: none">
+    <form action="" method="post" id="newMessageForm">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+                <a href="" onclick="return go_back_message(true)"><i class="icons icon-arrow-left"></i></a>
+                <?php _lang('new-message')?>
+            </h5>
+            <button onclick="return close_message_dialog()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label><?php _lang('to')?></label>
+                <select style="width:100%" class="form-control" name="to">
+                    <?php foreach(get_followers(get_userid()) as $user):?>
+                        <option value="<?php echo $user['id']?>"><?php echo $user['full_name']?></option>
+                    <?php endforeach?>
+                </select>
+            </div>
+
+
+        </div>
+        <div class="modal-footer">
+
+            <button type="submit" class="btn btn-primary btn-sm"><?php _lang('start-conversation')?></button>
+        </div>
+    </form>
+</div>

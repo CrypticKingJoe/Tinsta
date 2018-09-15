@@ -1,0 +1,29 @@
+<div class="explore">
+    <?php $users = suggest_users(3)?>
+    <?php if($users):?>
+        <h6><?php _lang('discover-people')?> <a href="<?php echo url('explore/people')?>" class="float-right ajax-link"><?php _lang('see-all')?></a></h6>
+        <div class="row">
+            <?php foreach($users as $user):?>
+                <div class="col-sm-4">
+                    <?php echo view('main::user/display', array('user' => $user))?>
+                </div>
+            <?php endforeach?>
+        </div>
+    <?php endif?>
+
+    <h6><?php _lang('explore')?></h6>
+
+    <?php $posts = get_posts(0, null, 'explore')?>
+    <?php if($posts):?>
+        <div class="post-lists row post-list" data-userid="" data-page="explore" data-types="grid" data-offset="0">
+            <?php foreach($posts as $post):?>
+                <?php echo view('main::post/each-grid', array('post' => $post));?>
+            <?php endforeach?>
+        </div>
+    <?php else:?>
+        <div style="text-align: center;padding: 40px  10px;font-size: 15px">
+            <i class="icons icon-pie-chart" style="font-size: 50px;display: block;margin: 10px auto"></i>
+            <?php _lang('no-posts-display')?>
+        </div>
+    <?php endif?>
+</div>

@@ -1,0 +1,24 @@
+<div class="each-notification  <?php echo (!$notification['seen']) ? 'not-unread': null?>">
+    <?php mark_notification($notification['id']); $user = get_user($notification['from_userid']);$key = $notification['notification_key'];?>
+    <?php if($key == 'follow-you'):?>
+        <a href="<?php echo profile_link($user)?>" class="ajax-link">
+            <div class="media">
+                <img class="d-flex mr-3" src="<?php echo get_avatar(75, $user)?>" >
+                <div class="media-body">
+                    <h6 style="font-size: 12px" class="mt-0"><strong><?php echo $user['full_name']?></strong> <?php _lang('started-following')?> - <span class="time"><?php echo format_time($notification['date_created'])?></span></h6>
+                </div>
+            </div>
+        </a>
+    <?php elseif($key == 'comment-post-your' or $key == 'comment-post' or $key =='like-post'):?>
+        <a href="<?php echo url('post/'.$notification['post_id'])?>" class="ajax-link">
+            <div class="media">
+                <img class="d-flex mr-3" src="<?php echo get_avatar(75, $user)?>" >
+                <div class="media-body">
+                    <h6  style="font-size: 12px" class="mt-0"><strong><?php echo $user['full_name']?></strong>
+                        <?php _lang($key)?>
+                        - <span class="time"><?php echo format_time($notification['date_created'])?></span></h6>
+                </div>
+            </div>
+        </a>
+    <?php endif?>
+</div>

@@ -1,0 +1,17 @@
+<div class="row">
+    <div class="col-md-4"></div>
+    <div  id="getstarted-step-1" class="col-md-4">
+        <img src="<?php echo url('assets/images/icon-avatar.png')?>"/>
+        <h6><?php _lang('add-profile-photo')?></h6>
+        <p><?php _lang('add-profile-photo-note')?></p>
+        <form action="" method="post" enctype="multipart/form-data" id="getstarted-step-1-form">
+            <div class="file-chooser">
+                <input onchange="return validate_image_size(this, 'image')" type="file" name="avatar"/>
+                <button class="btn btn-sm btn-primary btn-block"><?php _lang('select-a-picture')?></button>
+            </div>
+        </form>
+
+        <a class="ajax-link" href="<?php echo url('getstarted?step=2')?>" class="skip_button"><?php _lang('skip')?></a>
+    </div>
+    <div class="col-md-4"></div>
+</div>

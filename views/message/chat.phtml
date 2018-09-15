@@ -1,0 +1,5 @@
+<div><?php echo $message['message']?></div>
+<?php if($message['image']):?>
+    <a href="" onclick="return view_photo('<?php echo url($message['image'])?>')"><img src="<?php echo url($message['image'])?>" style="width: 300px"/> </a>
+<?php endif?>
+<div class="time" style="font-size: 10px !important;"><?php echo format_time($message['date_created'])?></div>

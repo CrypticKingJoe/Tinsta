@@ -1,0 +1,18 @@
+<div style="padding-top: 20px">
+    <div class="row pane">
+
+        <div class="col-md-3 left menu">
+            <ul class="nav flex-column">
+                <li><a class="nav-link ajax-link <?php echo ($type == 'profile') ? 'active' : null?>" href="<?php echo url('settings')?>"><?php _lang('edit-profile')?></a></li>
+                <li><a class="nav-link ajax-link <?php echo ($type == 'password') ? 'active' : null?>" href="<?php echo url('settings?type=password')?>"><?php _lang('change-password')?></a></li>
+                <li><a class="nav-link ajax-link <?php echo ($type == 'notifications') ? 'active' : null?>" href="<?php echo url('settings?type=notifications')?>"><?php _lang('notifications')?></a></li>
+                <li><a class="nav-link ajax-link <?php echo ($type == 'verification') ? 'active' : null?>" href="<?php echo url('settings?type=verification')?>"><?php _lang('verification')?></a></li>
+                <li><a class="nav-link ajax-link <?php echo ($type == 'privacy') ? 'active' : null?>" href="<?php echo url('settings?type=privacy')?>"><?php _lang('privacy')?></a></li>
+                <li><a class="nav-link ajax-link <?php echo ($type == 'blocked') ? 'active' : null?>" href="<?php echo url('settings?type=blocked')?>"><?php _lang('blocked-members')?></a></li>
+            </ul>
+        </div>
+        <div class="col-md-9 right">
+            <?php echo $content?>
+        </div>
+    </div>
+</div>

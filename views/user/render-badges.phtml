@@ -1,0 +1,9 @@
+<?php $badges = get_user_badges($user['id'])?>
+<?php if($badges):?>
+
+    <div class="badges-container">
+        <?php foreach($badges as $badge):?>
+            <img class="tool-tip" title="<?php echo $badge['name']?>"  src="<?php echo url($badge['image'])?>"/>
+        <?php endforeach?>
+    </div>
+<?php endif?>

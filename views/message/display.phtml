@@ -1,0 +1,12 @@
+<?php mark_message_read($message)?>
+<div class="chat clearfix">
+    <?php if($message['user_id'] != get_userid()):?>
+        <div class="float-left left">
+            <?php echo view('main::message/chat', array('message' => $message))?>
+        </div>
+    <?php else:?>
+        <div class="float-right right ">
+            <?php echo view('main::message/chat', array('message' => $message))?>
+        </div>
+    <?php endif?>
+</div>

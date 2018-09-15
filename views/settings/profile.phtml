@@ -1,0 +1,53 @@
+<form action="" method="post" enctype="multipart/form-data">
+    <?php if($error):?>
+        <div class="alert alert-danger"><?php echo $error?></div>
+    <?php endif?>
+    <?php if($message):?>
+        <div class="alert alert-success"><?php echo $message?></div>
+    <?php endif?>
+    <div class="row">
+        <div class="col-sm-3">
+            <img style="width: 80px;height: 80px;border-radius: 100px" src="<?php echo get_avatar(200)?>"/>
+        </div>
+        <div class="col-sm-9">
+            <h6><?php _lang('add-profile-photo')?></h6>
+            <p><?php _lang('add-profile-photo-note')?></p>
+            <div class="file-chooser">
+                <input onchange="return validate_image_size(this, 'image')" type="file" name="avatar"/>
+                <button class="btn btn-sm btn-secondary "><?php _lang('select-a-picture')?></button>
+            </div>
+        </div>
+    </div>
+
+    <hr/>
+    <div class="form-group row">
+        <label class="label col-sm-4"><?php _lang('fullname')?></label>
+        <input type="text" class="form-control col-sm-6" name="fullname" value="<?php echo get_user()['full_name']?>"/>
+    </div>
+
+    <div class="form-group row">
+        <label class="label col-sm-4"><?php _lang('username')?></label>
+        <input type="text" class="form-control col-sm-6" name="username" value="<?php echo get_user()['username']?>"/>
+    </div>
+
+    <div class="form-group row">
+        <label class="label col-sm-4"><?php _lang('email-address')?></label>
+        <input type="email" class="form-control col-sm-6" name="email" value="<?php echo get_user()['email']?>"/>
+    </div>
+
+    <div class="form-group row">
+        <label class="label col-sm-4"><?php _lang('website')?></label>
+        <input type="text" class="form-control col-sm-6" name="website" value="<?php echo get_user()['website']?>"/>
+    </div>
+
+    <div class="form-group row">
+        <label class="label col-sm-4"><?php _lang('bio')?></label>
+        <input type="text" class="form-control col-sm-6" name="bio" value="<?php echo get_user()['bio']?>"/>
+    </div>
+
+    <hr/>
+
+    <div  style="padding: 10px; text-align: center">
+        <button class="btn btn-primary btn-sm"><?php _lang('save')?></button>
+    </div>
+</form>

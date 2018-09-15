@@ -1,0 +1,584 @@
+<h1 class="title">
+    <?php _lang('settings')?>
+    <a class="float-right btn btn-sm btn-secondary" href="<?php echo url('admin/system/update')?>"><?php _lang('update-system')?></a>
+</h1>
+
+<ul class="nav nav-tabs " role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#setting-general" role="tab"><?php _lang('general')?></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#setting-registration" role="tab"><?php _lang('registration')?></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#setting-limit" role="tab"><?php _lang('limit')?></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#setting-features" role="tab"><?php _lang('features')?></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#setting-api" role="tab"><?php _lang('API')?></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#setting-emails" role="tab"><?php _lang('emails')?></a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#setting-badge" role="tab"><?php _lang('badge-point')?></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#setting-announcement" role="tab"><?php _lang('announcement')?></a>
+    </li>
+</ul>
+
+<?php if($message):?>
+    <div class="alert alert-success"><?php echo $message?></div>
+<?php endif?>
+<form enctype="multipart/form-data" action="" method="post">
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div class="tab-pane fade  " id="setting-features" role="tabpanel">
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('enable-stories')?></label>
+                <div class="col-9">
+                    <select name="val[enable-stories]"  class="form-control-sm">
+                        <option <?php echo (config('enable-stories', true) == 1) ? 'selected' : null?> value="1"><?php _lang('yes')?></option>
+                        <option <?php echo (config('enable-stories', true) == 0) ? 'selected' : null?> value="0"><?php _lang('no')?></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('enable-video-upload')?></label>
+                <div class="col-9">
+                    <select name="val[enable-video-upload]"  class="form-control-sm">
+                        <option <?php echo (config('enable-video-upload', true) == 1) ? 'selected' : null?> value="1"><?php _lang('yes')?></option>
+                        <option <?php echo (config('enable-video-upload', true) == 0) ? 'selected' : null?> value="0"><?php _lang('no')?></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('enable-link-embed')?></label>
+                <div class="col-9">
+                    <select name="val[enable-link-embed]"  class="form-control-sm">
+                        <option <?php echo (config('enable-link-embed', true) == 1) ? 'selected' : null?> value="1"><?php _lang('yes')?></option>
+                        <option <?php echo (config('enable-link-embed', true) == 0) ? 'selected' : null?> value="0"><?php _lang('no')?></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('enable-inline-suggestion')?></label>
+                <div class="col-9">
+                    <select name="val[enable-inline-suggestion]"  class="form-control-sm">
+                        <option <?php echo (config('enable-inline-suggestion', true) == 1) ? 'selected' : null?> value="1"><?php _lang('yes')?></option>
+                        <option <?php echo (config('enable-inline-suggestion', true) == 0) ? 'selected' : null?> value="0"><?php _lang('no')?></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('use-user-interest-in-feed')?></label>
+                <div class="col-9">
+                    <select name="val[use-interest-post]"  class="form-control-sm">
+                        <option <?php echo (config('use-interest-post', true) == 1) ? 'selected' : null?> value="1"><?php _lang('yes')?></option>
+                        <option <?php echo (config('use-interest-post', true) == 0) ? 'selected' : null?> value="0"><?php _lang('no')?></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade  " id="setting-announcement" role="tabpanel">
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('announcement')?></label>
+                <div class="col-9">
+                    <textarea class="form-control" name="val[announcement]" ><?php echo config('announcement', '')?></textarea>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('type')?></label>
+                <div class="col-9">
+                    <select name="val[announcement-type]"  class="form-control-sm">
+                        <option <?php echo (config('announcement-type', 'info') == 'info') ? 'selected' : null?> value="info"><?php _lang('info')?></option>
+                        <option <?php echo (config('announcement-type', 'info') == 'danger') ? 'selected' : null?> value="danger"><?php _lang('danger')?></option>
+                        <option <?php echo (config('announcement-type', 'info') == 'warning') ? 'selected' : null?> value="warning"><?php _lang('warning')?></option>
+                        <option <?php echo (config('announcement-type', 'info') == 'success') ? 'selected' : null?> value="success"><?php _lang('success')?></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade  " id="setting-badge" role="tabpanel">
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('enable-badge')?></label>
+                <div class="col-9">
+                    <select name="val[enable-badge]"  class="form-control-sm">
+                        <option <?php echo (config('enable-badge', 1) == 1) ? 'selected' : null?> value="1"><?php _lang('yes')?></option>
+                        <option <?php echo (config('enable-badge', 1) == 0) ? 'selected' : null?> value="0"><?php _lang('no')?></option>
+                    </select>
+                </div>
+            </div>
+
+            <hr/>
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('show-user-points')?></label>
+                <div class="col-9">
+                    <select name="val[show-point]"  class="form-control-sm">
+                        <option <?php echo (config('show-point', 1) == 1) ? 'selected' : null?> value="1"><?php _lang('yes')?></option>
+                        <option <?php echo (config('show-point', 1) == 0) ? 'selected' : null?> value="0"><?php _lang('no')?></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('show-top-members')?></label>
+                <div class="col-9">
+                    <select name="val[show-top-members]"  class="form-control-sm">
+                        <option <?php echo (config('show-top-members', 1) == 1) ? 'selected' : null?> value="1"><?php _lang('yes')?></option>
+                        <option <?php echo (config('show-top-members', 1) == 0) ? 'selected' : null?> value="0"><?php _lang('no')?></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('how-many-top-member-display')?></label>
+                <div class="col-9">
+                    <input class="form-control" name="val[top-members-limit]" type="text" value="<?php echo config('top-members-limit', '10')?>" >
+                </div>
+            </div>
+            <hr/>
+            <p><?php _lang('set-point-to-receive')?></p>
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('add-post-point')?></label>
+                <div class="col-9">
+                    <input class="form-control" name="val[add-post-point]" type="text" value="<?php echo config('add-post-point', '10')?>" >
+                </div>
+            </div>
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('add-comment-point')?></label>
+                <div class="col-9">
+                    <input class="form-control" name="val[add-comment-point]" type="text" value="<?php echo config('add-comment-point', '10')?>" >
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('like-post-point')?></label>
+                <div class="col-9">
+                    <input class="form-control" name="val[like-post-point]" type="text" value="<?php echo config('like-post-point', '10')?>" >
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('add-follow-point')?></label>
+                <div class="col-9">
+                    <input class="form-control" name="val[add-follow-point]" type="text" value="<?php echo config('add-follow-point', '10')?>" >
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade  " id="setting-api" role="tabpanel">
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('google-analytics-id')?></label>
+                <div class="col-9">
+                    <input class="form-control" name="val[google-analytic]" type="text" value="<?php echo config('google-analytic', '')?>" >
+                </div>
+            </div>
+            <hr/>
+            <h6>Facebook</h6>
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('enable')?></label>
+                <div class="col-9">
+                    <select name="val[facebook-enabled]"  class="form-control-sm">
+                        <option <?php echo (config('facebook-enabled', 0) == 1) ? 'selected' : null?> value="1"><?php _lang('yes')?></option>
+                        <option <?php echo (config('facebook-enabled', 0) == 0) ? 'selected' : null?> value="0"><?php _lang('no')?></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('key')?></label>
+                <div class="col-9">
+                    <input class="form-control" name="val[facebook-key]" type="text" value="<?php echo config('facebook-key', '')?>" >
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('secret')?></label>
+                <div class="col-9">
+                    <input class="form-control" name="val[facebook-secret]" type="text" value="<?php echo config('facebook-secret', '')?>" >
+                </div>
+            </div>
+
+            <hr/>
+            <h6>Twitter</h6>
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('enable')?></label>
+                <div class="col-9">
+                    <select name="val[twitter-enabled]"  class="form-control-sm">
+                        <option <?php echo (config('twitter-enabled', 0) == 1) ? 'selected' : null?> value="1"><?php _lang('yes')?></option>
+                        <option <?php echo (config('twitter-enabled', 0) == 0) ? 'selected' : null?> value="0"><?php _lang('no')?></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('key')?></label>
+                <div class="col-9">
+                    <input class="form-control" name="val[twitter-key]" type="text" value="<?php echo config('twitter-key', '')?>" >
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('secret')?></label>
+                <div class="col-9">
+                    <input class="form-control" name="val[twitter-secret]" type="text" value="<?php echo config('twitter-secret', '')?>" >
+                </div>
+            </div>
+
+            <hr/>
+            <h6>Google</h6>
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('enable')?></label>
+                <div class="col-9">
+                    <select name="val[google-enabled]"  class="form-control-sm">
+                        <option <?php echo (config('google-enabled', 0) == 1) ? 'selected' : null?> value="1"><?php _lang('yes')?></option>
+                        <option <?php echo (config('google-enabled', 0) == 0) ? 'selected' : null?> value="0"><?php _lang('no')?></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('key')?></label>
+                <div class="col-9">
+                    <input class="form-control" name="val[google-key]" type="text" value="<?php echo config('google-key', '')?>" >
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('secret')?></label>
+                <div class="col-9">
+                    <input class="form-control" name="val[google-secret]" type="text" value="<?php echo config('google-secret', '')?>" >
+                </div>
+            </div>
+
+            <hr/>
+            <h6>Instagram</h6>
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('enable')?></label>
+                <div class="col-9">
+                    <select name="val[instagram-enabled]"  class="form-control-sm">
+                        <option <?php echo (config('instagram-enabled', 0) == 1) ? 'selected' : null?> value="1"><?php _lang('yes')?></option>
+                        <option <?php echo (config('instagram-enabled', 0) == 0) ? 'selected' : null?> value="0"><?php _lang('no')?></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('key')?></label>
+                <div class="col-9">
+                    <input class="form-control" name="val[instagram-key]" type="text" value="<?php echo config('instagram-key', '')?>" >
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('secret')?></label>
+                <div class="col-9">
+                    <input class="form-control" name="val[instagram-secret]" type="text" value="<?php echo config('instagram-secret', '')?>" >
+                </div>
+            </div>
+
+            <hr/>
+            <h6>Vkontakte</h6>
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('enable')?></label>
+                <div class="col-9">
+                    <select name="val[vkontakte-enabled]"  class="form-control-sm">
+                        <option <?php echo (config('vkontakte-enabled', 0) == 1) ? 'selected' : null?> value="1"><?php _lang('yes')?></option>
+                        <option <?php echo (config('vkontakte-enabled', 0) == 0) ? 'selected' : null?> value="0"><?php _lang('no')?></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('key')?></label>
+                <div class="col-9">
+                    <input class="form-control" name="val[vkontakte-key]" type="text" value="<?php echo config('vkontakte-key', '')?>" >
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('secret')?></label>
+                <div class="col-9">
+                    <input class="form-control" name="val[vkontakte-secret]" type="text" value="<?php echo config('vkontakte-secret', '')?>" >
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade show active" id="setting-general" role="tabpanel">
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('site-logo')?></label>
+                <div class="col-9">
+                    <img src="<?php echo url(config('site-logo', 'assets/images/logo.png'))?>" style="width: 150px;margin-bottom: 10px"/>
+                    <input type="hidden" value="<?php echo config('site-logo', 'assets/images/logo.png')?>" name="val[site-logo]"/>
+                    <input type="file" id="file" name="site_logo" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('site-favicon')?></label>
+                <div class="col-9">
+                    <img src="<?php echo url(config('site-favicon', 'assets/images/favicon.png'))?>" style="width: 50px"/>
+                    <input type="hidden" value="<?php echo config('site-favicon', 'assets/images/favicon.png')?>" name="val[site-favicon]"/>
+                    <input type="file" id="file" name="site_favicon" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('site-title')?></label>
+                <div class="col-9">
+                    <input class="form-control" name="val[site-title]" type="text" value="<?php echo config('site-title', 'Tinsta')?>" >
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('default-language')?></label>
+                <div class="col-9">
+                    <select name="val[default_language]" class="form-control-sm">
+                        <?php foreach(get_languages_list() as $key => $name):?>
+                            <option <?php echo (config('default_language', 'en') == $key) ? 'selected' : null?> value="<?php echo $key?>"><?php echo $name?></option>
+                        <?php endforeach?>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('description')?></label>
+                <div class="col-9">
+                    <textarea style="height: 100px" class="form-control" name="val[site-description]"><?php echo config('site-description', '')?></textarea>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('keywords')?></label>
+                <div class="col-9">
+                    <input class="form-control" name="val[site-keywords]" type="text" value="<?php echo config('site-keywords', '')?>" >
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+        <div class="tab-pane fade" id="setting-registration" role="tabpanel">
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('enable-registration')?></label>
+                <div class="col-9">
+                    <select name="val[enable-signup]"  class="form-control-sm">
+                        <option <?php echo (config('enable-signup', 1) == 1) ? 'selected' : null?> value="1"><?php _lang('yes')?></option>
+                        <option <?php echo (config('enable-signup', 1) == 0) ? 'selected' : null?> value="0"><?php _lang('no')?></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('send-welcome-mail')?></label>
+                <div class="col-9">
+                    <select name="val[send-welcome-mail]"  class="form-control-sm">
+                        <option <?php echo (config('send-welcome-mail', 1) == 1) ? 'selected' : null?> value="1"><?php _lang('yes')?></option>
+                        <option <?php echo (config('send-welcome-mail', 1) == 0) ? 'selected' : null?> value="0"><?php _lang('no')?></option>
+                    </select>
+                </div>
+            </div>
+
+            <hr/>
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('auto-follow-accounts')?></label>
+                <div class="col-9">
+                    <input class="form-control" name="val[auto-follow]" type="text" value="<?php echo config('auto-follow', '')?>" >
+                    <p><?php _lang('auto-follow-accounts-note')?></p>
+                </div>
+            </div>
+            <hr/>
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('enable-recaptcha')?></label>
+                <div class="col-9">
+                    <select name="val[enable-recaptcha]"  class="form-control-sm">
+                        <option <?php echo (config('enable-recaptcha', 0) == 1) ? 'selected' : null?> value="1"><?php _lang('yes')?></option>
+                        <option <?php echo (config('enable-recaptcha', 0) == 0) ? 'selected' : null?> value="0"><?php _lang('no')?></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('recaptcha-v2-site-key')?></label>
+                <div class="col-9">
+                    <input class="form-control" name="val[captcha-site-key]" type="text" value="<?php echo config('captcha-site-key', '')?>" >
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('recaptcha-v2-secret-key')?></label>
+                <div class="col-9">
+                    <input class="form-control" name="val[captcha-secret-key]" type="text" value="<?php echo config('captcha-secret-key', '')?>" >
+                </div>
+            </div>
+
+        </div>
+        <div class="tab-pane fade" id="setting-limit" role="tabpanel">
+
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('supported-video-type')?></label>
+                <div class="col-9">
+                    <input class="form-control" name="val[video-file-types]" type="text" value="<?php echo config('video-file-types', 'mp4')?>" >
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('supported-image-type')?></label>
+                <div class="col-9">
+                    <input class="form-control" name="val[image-file-types]" type="text" value="<?php echo config('image-file-types', 'jpg,png,gif,jpeg')?>" >
+                </div>
+            </div>
+            <hr/>
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('maximum-images-upload-atonce')?></label>
+                <div class="col-9">
+                    <select class="form-control form-control-sm" name="val[allowed-images]">
+                        <option <?php echo (config('allowed-images', '0') == 0) ? 'selected' : null?> value="0"><?php _lang('unlimited')?></option>
+                        <option <?php echo (config('allowed-images', '0') == 5) ? 'selected' : null?> value="5">5</option>
+                        <option <?php echo (config('allowed-images', '0') == 10) ? 'selected' : null?> value="10">10</option>
+                        <option <?php echo (config('allowed-images', '0') == 20) ? 'selected' : null?> value="20">20</option>
+                        <option <?php echo (config('allowed-images', '0') == 30) ? 'selected' : null?> value="30">30</option>
+                        <option <?php echo (config('allowed-images', '0') == 50) ? 'selected' : null?> value="50">50</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('maximum-photo-upload-size')?></label>
+                <div class="col-9">
+                    <select class="form-control form-control-sm" name="val[max-image-size]">
+                        <option <?php echo (config('max-image-size', '10000000') ==  5242880) ? 'selected' : null?> value="5242880">5MB</option>
+                        <option <?php echo (config('max-image-size', '10000000') ==  10000000) ? 'selected' : null?> value="10000000">10MB</option>
+                        <option <?php echo (config('max-image-size', '10000000') ==  20971520) ? 'selected' : null?> value="20971520">20MB</option>
+                        <option <?php echo (config('max-image-size', '10000000') ==  31457280) ? 'selected' : null?> value="31457280">30MB</option>
+                        <option <?php echo (config('max-image-size', '10000000') ==  52428800) ? 'selected' : null?> value="52428800">50MB</option>
+                        <option <?php echo (config('max-image-size', '10000000') ==  104857600) ? 'selected' : null?> value="104857600">100MB</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('maximum-video-upload-size')?></label>
+                <div class="col-9">
+                    <select class="form-control form-control-sm" name="val[max-video-size]">
+                        <option <?php echo (config('max-video-size', '10000000') ==  5242880) ? 'selected' : null?> value="5242880">5MB</option>
+                        <option <?php echo (config('max-video-size', '10000000') ==  10000000) ? 'selected' : null?> value="10000000">10MB</option>
+                        <option <?php echo (config('max-video-size', '10000000') ==  20971520) ? 'selected' : null?> value="20971520">20MB</option>
+                        <option <?php echo (config('max-video-size', '10000000') ==  31457280) ? 'selected' : null?> value="31457280">30MB</option>
+                        <option <?php echo (config('max-video-size', '10000000') ==  52428800) ? 'selected' : null?> value="52428800">50MB</option>
+                        <option <?php echo (config('max-video-size', '10000000') ==  104857600) ? 'selected' : null?> value="104857600">100MB</option>
+                    </select>
+                </div>
+            </div>
+
+            <hr/>
+
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('feeds-post-list-type')?></label>
+                <div class="col-9">
+
+                    <select class="form-control form-control-sm" name="val[feeds-post-list-type]">
+                        <option <?php echo (config('feeds-post-list-type', '0') == 0) ? 'selected' : null?> value="0"><?php _lang('following-posts')?></option>
+                        <option <?php echo (config('feeds-post-list-type', '0') == 1) ? 'selected' : null?> value="1"><?php _lang('all-member-posts')?></option>
+
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('post-per-page')?></label>
+                <div class="col-9">
+                    <input class="form-control" name="val[post-per-page]" type="text" value="<?php echo config('post-per-page', '10')?>" >
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('comment-per-page')?></label>
+                <div class="col-9">
+                    <input class="form-control" name="val[comment-per-page]" type="text" value="<?php echo config('comment-per-page', '5')?>" >
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="setting-emails" role="tabpanel">
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('email-driver')?></label>
+                <div class="col-9">
+                    <select class="form-control form-control-sm" name="val[email-driver]">
+                        <option <?php echo (config('email-driver', 'mail') == 'mail') ? 'selected' : null?> value="mail">PHP Mail</option>
+                        <option <?php echo (config('email-driver', 'mail') == 'smtp') ? 'selected' : null?> value="smtp">SMTP</option>
+
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label  class="col-3 col-form-label"><?php _lang('from-address')?></label>
+                <div class="col-9">
+                    <input class="form-control" name="val[from_address]" type="text" value="<?php echo config('from_address', '')?>" >
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label  class="col-3 col-form-label">SMTP Host</label>
+                <div class="col-9">
+                    <input class="form-control" name="val[smtp-host]" type="text" value="<?php echo config('smtp-host', '')?>" >
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label  class="col-3 col-form-label">SMTP Port</label>
+                <div class="col-9">
+                    <input class="form-control" name="val[smtp-port]" type="text" value="<?php echo config('smtp-port', '')?>" >
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label  class="col-3 col-form-label">SMTP username</label>
+                <div class="col-9">
+                    <input class="form-control" name="val[smtp-username]" type="text" value="<?php echo config('smtp-username', '')?>" >
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label  class="col-3 col-form-label">SMTP password</label>
+                <div class="col-9">
+                    <input class="form-control" name="val[smtp-password]" type="text" value="<?php echo config('smtp-password', '')?>" >
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label  class="col-3 col-form-label">SMTP charset</label>
+                <div class="col-9">
+                    <input class="form-control" name="val[smtp-charset]" type="text" value="<?php echo config('smtp-charset', 'utf-8')?>" >
+                </div>
+            </div>
+
+
+            <hr/>
+
+            <div class="form-group row">
+                <label  class="col-3 col-form-label">Test Email</label>
+                <div class="col-9">
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" name="test_email"/>
+                        </div>
+                        <div class="col-sm-2">
+                            <button class="btn btn-sm btn-info"><?php _lang('send')?></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <hr/>
+    <button class="btn btn-primary btn-sm"><?php _lang('save')?></button>
+</form>
+
+<hr/>

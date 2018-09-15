@@ -1,0 +1,37 @@
+<h1 class="title"><?php _lang('tags')?> <a data-toggle="modal" data-target="#tagModal" class="btn btn-sm btn-primary" href=""><?php _lang('add-tag')?></a></h1>
+<div class="modal fade" id="tagModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><?php _lang('add-tag')?></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="" method="post">
+                <div class="modal-body">
+                    <input type="text" name="name" class="form-control"/>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary btn-sm"><?php _lang('save')?></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<table class="table">
+    <thead class="thead-default">
+        <tr>
+            <th style="width: 70%"><?php _lang('name')?></th>
+            <th><?php _lang('action')?></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach(get_tags() as $tag):?>
+            <tr>
+                <td><?php echo $tag['name']?></td>
+                <td><a href="<?php echo url('admin/tag/delete').'?id='.$tag['id']?>"><i class="icons icon-close"></i></a></td>
+            </tr>
+        <?php endforeach?>
+    </tbody>
+</table>

@@ -1,0 +1,93 @@
+<h5><?php _lang('edit-user')?></h5>
+<form action="" method="post" enctype="multipart/form-data">
+    <?php if($error):?>
+        <div class="alert alert-danger"><?php echo $error?></div>
+    <?php endif?>
+    <?php if($message):?>
+        <div class="alert alert-success"><?php echo $message?></div>
+    <?php endif?>
+    <div class="row">
+        <div class="col-sm-3">
+            <img style="width: 80px;height: 80px;border-radius: 100px" src="<?php echo get_avatar(200, $user)?>"/>
+        </div>
+        <div class="col-sm-9">
+            <h6><?php _lang('add-profile-photo')?></h6>
+            <p><?php _lang('add-profile-photo-note')?></p>
+            <div class="file-chooser">
+                <input onchange="validate_image_size(this,'image')" type="file" name="avatar"/>
+                <button class="btn btn-sm btn-secondary "><?php _lang('select-a-picture')?></button>
+            </div>
+        </div>
+    </div>
+
+    <hr/>
+    <div class="form-group row">
+        <label class="label col-sm-4"><?php _lang('fullname')?></label>
+        <input type="text" class="form-control col-sm-6" name="val[full_name]" value="<?php echo $user['full_name']?>"/>
+    </div>
+
+    <div class="form-group row">
+        <label class="label col-sm-4"><?php _lang('username')?></label>
+        <input type="text" class="form-control col-sm-6" name="val[username]" value="<?php echo $user['username']?>"/>
+    </div>
+
+    <div class="form-group row">
+        <label class="label col-sm-4"><?php _lang('password')?></label>
+        <input type="password" class="form-control col-sm-6" name="val[password]" value=""/>
+    </div>
+
+    <div class="form-group row">
+        <label class="label col-sm-4"><?php _lang('email-address')?></label>
+        <input type="email" class="form-control col-sm-6" name="val[email]" value="<?php echo $user['email']?>"/>
+    </div>
+
+    <div class="form-group row">
+        <label class="label col-sm-4"><?php _lang('website')?></label>
+        <input type="text" class="form-control col-sm-6" name="val[website]" value="<?php echo $user['website']?>"/>
+    </div>
+
+    <div class="form-group row">
+        <label class="label col-sm-4"><?php _lang('bio')?></label>
+        <input type="text" class="form-control col-sm-6" name="val[bio]" value="<?php echo $user['bio']?>"/>
+    </div>
+
+    <hr/>
+    <div class="form-group row">
+        <label class="label col-sm-4"><?php _lang('role')?></label>
+        <select name="val[role]" class="form-control-sm">
+            <option <?php echo ($user['role'] == 0) ? 'selected' : null?> value="0"><?php _lang('member')?></option>
+            <option <?php echo ($user['role'] == 2) ? 'selected' : null?> value="1"><?php _lang('moderator')?></option>
+            <option <?php echo ($user['role'] == 1) ? 'selected' : null?> value="1"><?php _lang('admin')?></option>
+        </select>
+    </div>
+    <hr/>
+    <div class="form-group row">
+        <label class="label col-sm-4"><?php _lang('verified')?></label>
+        <select name="val[verified]" class="form-control-sm">
+            <option <?php echo ($user['verified'] == 0) ? 'selected' : null?> value="0"><?php _lang('no')?></option>
+            <option <?php echo ($user['verified'] == 1) ? 'selected' : null?> value="1"><?php _lang('yes')?></option>
+        </select>
+    </div>
+
+    <div class="form-group row">
+        <label class="label col-sm-4"><?php _lang('active')?></label>
+        <select name="val[active]" class="form-control-sm">
+            <option <?php echo ($user['active'] == 0) ? 'selected' : null?> value="0"><?php _lang('no')?></option>
+            <option <?php echo ($user['active'] == 1) ? 'selected' : null?> value="1"><?php _lang('yes')?></option>
+        </select>
+    </div>
+
+    <div class="form-group row">
+        <label class="label col-sm-4"><?php _lang('banned')?></label>
+        <select name="val[banned]" class="form-control-sm">
+            <option <?php echo ($user['banned'] == 0) ? 'selected' : null?> value="0"><?php _lang('no')?></option>
+            <option <?php echo ($user['banned'] == 1) ? 'selected' : null?> value="1"><?php _lang('yes')?></option>
+        </select>
+    </div>
+
+    <hr/>
+
+    <div  style="padding: 10px; text-align: center">
+        <button class="btn btn-primary btn-sm"><?php _lang('save')?></button>
+    </div>
+</form> 

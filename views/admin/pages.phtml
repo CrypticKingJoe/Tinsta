@@ -1,0 +1,24 @@
+<h5><?php _lang('pages')?></h5>
+
+<form action="" method="post">
+
+    <div class="form-group row">
+        <label class="label col-sm-12"><?php _lang('terms-and-condition')?></label>
+        <textarea style="height: 250px" name="val[terms-and-condition]" class="form-control col-sm-12 rich-editor"><?php echo config('terms-and-condition', '')?></textarea>
+    </div>
+
+    <div class="form-group row">
+        <label class="label col-sm-12"><?php _lang('privacy')?></label>
+        <textarea style="height: 250px" name="val[privacy]" class="form-control col-sm-12 rich-editor"><?php echo config('privacy', '')?></textarea>
+    </div>
+
+
+    <div class="form-group row">
+        <label class="label col-sm-12"><?php _lang('about')?></label>
+        <textarea style="height: 250px" name="val[about]" class="form-control col-sm-12 rich-editor"><?php echo config('about', '')?></textarea>
+    </div>
+
+    <div  style="padding: 10px; text-align: center">
+        <button class="btn btn-primary btn-sm"><?php _lang('save')?></button>
+    </div>
+</form>

@@ -1,0 +1,26 @@
+<div class="row pane">
+
+    <div class="col-md-3 left menu">
+        <ul class="nav flex-column">
+            <li><a class="nav-link ajax-link <?php echo (segment(1) == '') ? ' active' : null?>" href="<?php echo url('admin')?>"><?php _lang('dashboard')?></a></li>
+            <li><a class="nav-link ajax-link <?php echo (segment(1) == 'settings') ? ' active' : null?>" href="<?php echo url('admin/settings')?>"><?php _lang('settings')?></a></li>
+            <li><a class="nav-link ajax-link <?php echo (segment(1) == 'tags') ? ' active' : null?>" href="<?php echo url('admin/tags')?>"><?php _lang('tags')?></a></li>
+            <li><a class="nav-link ajax-link <?php echo (segment(1) == 'appearance') ? ' active' : null?>" href="<?php echo url('admin/appearance')?>"><?php _lang('appearance')?></a></li>
+            <!--<li><a class="nav-link ajax-link" href=""><?php _lang('plugin-manager')?></a></li>-->
+            <li><a class="nav-link ajax-link <?php echo (segment(1) == 'users') ? ' active' : null?>" href="<?php echo url('admin/users')?>"><?php _lang('users-management')?></a></li>
+            <li><a class="nav-link ajax-link <?php echo (segment(1) == 'badges') ? ' active' : null?>" href="<?php echo url('admin/badges')?>"><?php _lang('user-badges')?></a></li>
+            <li><a class="nav-link ajax-link <?php echo (segment(1) == 'posts') ? ' active' : null?>" href="<?php echo url('admin/posts')?>"><?php _lang('posts-management')?></a></li>
+            <li><a class="nav-link ajax-link <?php echo (segment(1) == 'requests') ? ' active' : null?>" href="<?php echo url('admin/requests')?>">
+                    <?php _lang('verification-requests')?>
+                    <?php $count = count(get_verification_requests());if($count > 0):?>
+                        <span class="badge badge-danger"><?php echo $count?></span>
+                    <?php endif?>
+                </a></li>
+            <li><a class="nav-link ajax-link <?php echo (segment(1) == 'pages') ? ' active' : null?>" href="<?php echo url('admin/pages')?>"><?php _lang('pages')?></a></li>
+            <li><a class="nav-link ajax-link <?php echo (segment(1) == 'adverts') ? ' active' : null?>" href="<?php echo url('admin/adverts')?>"><?php _lang('advertisement')?></a></li>
+        </ul>
+    </div>
+    <div class="col-md-9 right">
+        <?php echo $content?>
+    </div>
+</div>

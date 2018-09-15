@@ -1,0 +1,22 @@
+<div class="media user-inline">
+
+        <img style="width: 30px;height: 30px;border-radius: 100px" class="d-flex mr-3" src="<?php echo get_avatar(75, $user)?>" >
+        <div class="media-body">
+            <a style="display: block" class="ajax-link" href="<?php echo profile_link($user)?>">
+                <h6 class="mt-0" style="font-size: 13px"><strong>
+                        <?php echo $user['username']?></strong>
+                        <?php echo view('main::user/badges', array('user' => $user))?>
+                </h6>
+                <p>
+                    <?php echo $user['full_name']?>
+                    <?php if(config('show-point', true)):?>
+                        <span class="badge badge-info badge-lg"> <?php echo $user['point']?> <?php _lang('points')?> </span>
+                    <?php endif?>
+                </p>
+            </a>
+        </div>
+
+    <div class="action">
+        <?php echo view('main::user/follow', array('user' => $user))?>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+<div class="comment clearfix comment-<?php echo $comment['id']?>">
+    <?php $user = get_user($comment['user_id']);?>
+    <div class="float-left">
+        <strong><?php echo $user['username']?> : </strong> <?php echo $comment['comment']?>
+    </div>
+    <div class="float-right">
+        <?php if(can_edit_comment($comment)):?>
+            <a href="" class="comment-remove-btn" data-id="<?php echo $comment['id']?>"><i class="icons icon-close"></i></a>
+        <?php endif?>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+<h5><?php _lang('user-badges')?> <a class="btn btn-primary btn-sm" href="<?php echo url('admin/badge?type=edit')?>"><?php _lang('add-new')?></a></h5>
+<table class="table" id="dataTable">
+    <thead>
+    <tr>
+        <th><?php _lang('name')?></th>
+        <th><?php _lang('image')?></th>
+        <th><?php _lang('point')?></th>
+        <th><?php _lang('user-received')?></th>
+        <th><?php _lang('options')?></th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach(admin_get_badge_lists() as $badge):?>
+        <tr>
+            <td><?php echo $badge['name']?>
+            </td>
+            <td><img src="<?php echo url($badge['image'])?>" style="max-width: 100px"/> </td>
+            <td><?php echo $badge['point']?></td>
+            <td><?php echo admin_count_user_with_badge($badge['id'])?></td>
+            <td>
+                <a class="btn btn-sm btn-secondary ajax-link" href="<?php echo url('admin/badge?type=edit&id='.$badge['id'])?>"><i class="icons icon-pencil"></i></a>
+                <a class="btn btn-sm btn-danger" href="<?php echo url('admin/badge?type=delete&id='.$badge['id'])?>"><i class="icons icon-close"></i></a>
+            </td>
+        </tr>
+    <?php endforeach?>
+    </tbody>
+</table>

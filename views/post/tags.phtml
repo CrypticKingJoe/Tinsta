@@ -1,0 +1,9 @@
+<?php $tags = get_all_post_tags($post['id']);?>
+
+<?php if($tags):?>
+    <div>
+        <?php foreach($tags as $tag):?>
+            <a class="ajax-link" style="display: inline-block;margin-right: 3px" href="<?php echo url('explore/tag?t='.$tag['name'])?>">#<?php echo $tag['name']?></a>
+        <?php endforeach?>
+    </div>
+<?php endif?>

@@ -1,0 +1,34 @@
+<form action="" method="post">
+
+    <h4><?php _lang('privacy')?></h4>
+    <?php if($message):?>
+        <div class="alert alert-success"><?php echo $message?></div>
+    <?php endif?>
+    <hr/>
+    <?php $privacy = get_user_privacy()?>
+
+    <div class="form-group row">
+        <label class="label col-sm-4"><?php _lang('who-can-view-profile')?></label>
+        <select class=" col-sm-2 form-control form-control-sm" name="val[who-can-view-profile]">
+            <option <?php echo ($privacy['who-can-view-profile'] == 1) ? 'selected' : null?> value="1"><?php _lang('everyone')?></option>
+            <option  <?php echo ($privacy['who-can-view-profile'] == 2) ? 'selected' : null?>  value="2"><?php _lang('followers')?></option>
+            <option  <?php echo ($privacy['who-can-view-profile'] == 3) ? 'selected' : null?>  value="3"><?php _lang('nobody')?></option>
+        </select>
+    </div>
+
+
+    <div class="form-group row">
+        <label class="label col-sm-4"><?php _lang('who-can-message')?></label>
+        <select class=" col-sm-2 form-control form-control-sm" name="val[who-can-message]">
+            <option <?php echo ($privacy['who-can-message'] == 1) ? 'selected' : null?> value="1"><?php _lang('everyone')?></option>
+            <option  <?php echo ($privacy['who-can-message'] == 2) ? 'selected' : null?>  value="2"><?php _lang('followers')?></option>
+            <option  <?php echo ($privacy['who-can-message'] == 3) ? 'selected' : null?>  value="3"><?php _lang('nobody')?></option>
+        </select>
+    </div>
+    <hr/>
+
+    <div  style="padding: 10px; text-align: center">
+        <button class="btn btn-primary btn-sm"><?php _lang('save')?></button>
+    </div>
+
+</form>

@@ -1,0 +1,25 @@
+<h5><?php _lang('posts-management')?></h5>
+<table class="table" id="dataTable">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th><?php _lang('poster')?></th>
+        <th><?php _lang('post')?></th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach(admin_get_post_lists() as $post):$user = get_user($post['user_id'])?>
+        <tr>
+            <td><?php echo $post['id']?></td>
+            <td>
+                <a href="<?php echo profile_link($user)?>">
+                    <img src="<?php echo get_avatar(75, $user)?>" style="width: 20px;height:20px;border-radius:100px"/> <?php echo $user['username']?>
+                </a>
+            </td>
+            <td><a href="" onclick="return view_post('<?php echo $post['id']?>')" class="btn btn-sm btn-secondary"><?php _lang('view-post')?></a></td>
+
+
+        </tr>
+    <?php endforeach?>
+    </tbody>
+</table>

@@ -1,0 +1,34 @@
+<h5><?php _lang('verification')?></h5>
+<?php if(user_has_pending_request()):?>
+ <?php if(get_user()['verified']):?>
+        <div class="alert alert-success"><?php _lang('you-verified')?></div>
+        <?php else:?>
+        <div class="alert alert-info"><?php _lang('verification-sent-already')?></div>
+        <?php endif?>
+<?php else:?>
+<form action="" method="post" enctype="multipart/form-data">
+    <div class="form-group row">
+        <label class="label col-sm-4"><?php _lang('name')?></label>
+        <input type="text" class="form-control col-sm-6" name="name" value=""/>
+    </div>
+
+    <div class="form-group row">
+        <label class="label col-sm-4"><?php _lang('message')?></label>
+        <textarea class="form-control col-sm-6" name="message" ></textarea>
+    </div>
+
+    <hr/>
+    <div class="form-group row">
+        <label class="label col-sm-4"><?php _lang('your-photo')?></label>
+        <input type="file" required class="form-control col-sm-6" name="photo_1" value=""/>
+    </div>
+
+    <div class="form-group row">
+        <label class="label col-sm-4"><?php _lang('passport-photo-id')?></label>
+        <input type="file" required class="form-control col-sm-6" name="photo_2" value=""/>
+    </div>
+    <div  style="padding: 10px; text-align: center">
+        <button class="btn btn-primary btn-sm"><?php _lang('send')?></button>
+    </div>
+</form>
+<?php endif?>

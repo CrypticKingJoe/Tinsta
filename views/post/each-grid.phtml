@@ -1,0 +1,37 @@
+<div class="<?php echo (isset($class)) ? $class : 'col-md-4'?> ">
+    <a href="" onclick="return view_post('<?php echo $post['id']?>', true)">
+        <div class="post-grid">
+            <div class="info">
+                <ul class="nav justify-content-center">
+                    <li class="nav-item">
+                        <i class="icons icon-heart"></i> <?php echo count_likes($post['id'])?>
+                    </li>
+                    <li class="nav-item">
+                        <i class="icons icon-bubble"></i> <?php echo count_comments($post['id'])?>
+                    </li>
+                </ul>
+            </div>
+            <?php $images = perfectUnserialize($post['images']); if($images): ?>
+                <div data-background-image="<?php echo url($images[0])?>" class="post-images lozad"></div>
+            <?php elseif($post['video']):?>
+                <?php if($post['video_image']):?>
+                    <div data-background-image="<?php echo url($post['video_image'])?>" class="post-images lozad"></div>
+                <?php else: //complete embed of player?>
+                    <video data-plyr='{ "controls" :[]}' style="height: 250px !important" poster="" >
+                        <source src="<?php echo url($post['video'])?>" type="video/mp4">
+                    </video>
+                <?php endif?>
+            <?php else:?>
+                <?php if($post['code_type'] == 'video' and $post['video_image']):?>
+                    <div data-background-image="<?php echo url($post['video_image'])?>" class="post-images lozad"></div>
+                <?php else:?>
+                    <?php if($post['code_type'] == 'photo'):?>
+                        <div data-background-image="<?php echo url($post['video_image'])?>" class="post-images lozad"></div>
+                    <?php else:?>
+                        <?php echo $post['embed_code']?>
+                    <?php endif?>
+                <?php endif?>
+            <?php endif?>
+        </div>
+    </a>
+</div>

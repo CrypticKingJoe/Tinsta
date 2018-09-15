@@ -1,0 +1,23 @@
+<h5><?php _lang('blocked-members')?></h5>
+
+<?php $users = get_blocked_list()?>
+<?php if($users):?>
+
+        <?php foreach($users as $user):?>
+        <div class="media user-inline">
+            <img style="width: 50px;height: 50px;border-radius: 100px" class="d-flex mr-3" src="<?php echo get_avatar(75, $user)?>" >
+            <div class="media-body">
+                <h6 class="mt-0"><strong><?php echo $user['username']?></strong></h6>
+                <p><?php echo $user['full_name']?> </p>
+            </div>
+            <div class="action">
+                <button onclick="return unblock_user('<?php echo $user['id']?>')" class="btn btn-sm btn-secondary"><?php _lang('unblock')?></button>
+            </div>
+        </div>
+        <?php endforeach?>
+<?php else:?>
+    <div style="text-align: center;padding: 40px  10px;font-size: 15px">
+        <i class="icons icon-pie-chart" style="font-size: 50px;display: block;margin: 10px auto"></i>
+        <?php _lang('you-have-not-block-any')?>
+    </div>
+<?php endif?>

@@ -1,0 +1,36 @@
+<h5><?php _lang('add-new')?></h5>
+<hr/>
+<form action="" method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-sm-3">
+            <?php if($badge):?>
+                <img style="max-width: 80px;" src="<?php echo url($badge['image'])?>"/>
+            <?php endif?>
+        </div>
+        <div class="col-sm-9">
+            <h6><?php _lang('badge-image')?></h6>
+
+            <div class="file-chooser">
+                <input onchange="validate_image_size(this,'image')" type="file" name="image"/>
+                <button class="btn btn-sm btn-secondary "><?php _lang('select-a-picture')?></button>
+            </div>
+        </div>
+    </div>
+
+    <hr/>
+    <div class="form-group row">
+        <label class="label col-sm-4"><?php _lang('name')?></label>
+        <input type="text" class="form-control col-sm-6" name="val[name]" value="<?php echo ($badge) ? $badge['name'] : null?>"/>
+    </div>
+
+    <div class="form-group row">
+        <label class="label col-sm-4"><?php _lang('point')?></label>
+        <input type="text" class="form-control col-sm-6" name="val[point]" value="<?php echo ($badge) ? $badge['point'] : null?>"/>
+    </div>
+
+    <hr/>
+
+    <div  style="padding: 10px; text-align: center">
+        <button class="btn btn-primary btn-sm"><?php _lang('save')?></button>
+    </div>
+</form>

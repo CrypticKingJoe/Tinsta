@@ -1,0 +1,30 @@
+<div style="padding-top: 20px">
+    <div class="pane">
+        <div class="m-4">
+            <h5><?php _lang('developers')?></h5>
+            <p><?php _lang('developers-welcome-note')?></p>
+
+            <h6><?php _lang('retrieve-user-profile')?></h6>
+            <hr/>
+            <p><?php _lang('retrieve-user-profile-note')?></p>
+            <p><code><?php echo url('api?request=profile&userid={USERNAME}')?></code></p>
+            <p><?php _lang('it-return-following')?></p>
+
+            <p><code>
+                    array(<br/>
+                    'username' => USER_NAME<br/>
+                    'name' => USER_FULLNAME<br/>
+                    'email' => USER_EMAIL<br/>
+                    'website' => USER_WEBSITE<br/>
+                    'avatar' => USER_PROFILE_PICTURE<br/>
+                    'bio' => USER_BIO<br/>
+                    'verified' => USER_VERIFIED<br/>
+                    )
+            </code></p>
+
+            <h6><?php _lang('retrieve-user-posts')?></h6>
+            <hr/>
+            <p><code><?php echo url('api?request=posts&userid={USERNAME}')?></code></p>
+        </div>
+    </div>
+</div>

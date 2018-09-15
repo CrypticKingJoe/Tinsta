@@ -1,0 +1,12 @@
+<div class="pane user">
+    <a class="ajax-link" href="<?php echo profile_link($user)?>">
+        <img style="width: 60px;height:60px;border-radius: 100px;margin: auto" src="<?php echo get_avatar(200, $user)?>"/>
+        <h6><?php echo $user['username']?>
+            <?php echo view('main::user/badges', array('user' => $user))?>
+        </h6>
+        <p><?php echo $user['full_name']?></p>
+    </a>
+
+
+    <?php echo view('main::user/follow', array('user' => $user))?>
+</div>

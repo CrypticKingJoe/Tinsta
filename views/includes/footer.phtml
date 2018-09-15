@@ -1,0 +1,37 @@
+<script>
+    var baseUrl = '<?php echo url()?>';
+    var isloggedin = <?php echo (is_loggedIn()) ? 1 : 0?>;
+    window.month = ['<?php _lang('january')?>','<?php _lang('february')?>','<?php _lang('match')?>','<?php _lang('april')?>','<?php _lang('may')?>',
+    '<?php _lang('june')?>','<?php _lang('july')?>','<?php _lang('august')?>','<?php _lang('september')?>','<?php _lang('october')?>','<?php _lang('november')?>',
+    '<?php _lang('december')?>'];
+    window.lang = {
+        ok : '<?php _lang("ok")?>',
+        yes: '<?php _lang('yes')?>',
+        cancel : '<?php _lang('cancel')?>',
+        are_you_sure : '<?php _lang('are_you_sure')?>',
+        notImageError : '<?php _lang('not-image-error')?>',
+        notVideoError : '<?php _lang('not-video-error')?>',
+        post_empty_error : '<?php _lang('post-empty-error')?>',
+        notStoryError : '<?php _lang('file-not-story-error')?>',
+    };
+    var allowPhotoSize = <?php echo config('max-image-size', 10000000)?>;
+    var checkTimeInterval = <?php echo config('check-interval-time', 10000)?>;
+    var allowVideoSize = <?php echo config('max-video-size', 10000000)?>;
+    var allowImagesUploaded  = <?php echo config('allowed-images', 0)?>;
+    var supportImagesType = '<?php echo config('image-file-types', 'jpg,png,gif,jpeg')?>';
+    var supportVideoType = '<?php echo config('video-file-types', 'mp4')?>';
+
+    var allowImageSizeError = '<?php echo lang('image-file-is-large', array('size' => format_bytes(config('max-image-size', 10000000))))?>'
+    var allowVideoSizeError = '<?php echo lang('video-file-is-large', array('size' => format_bytes(config('max-video-size', 10000000))))?>'
+    var allowedImageError = '<?php echo lang('allowed-number-image', array('number' => config('allowed-images', 0)))?>'
+</script>
+
+<?php echo $beforeContent?>
+<script src="<?php echo url('assets/js/plugin.js')?>"></script>
+<?php if(config('enable-recaptcha', 0)):?>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<?php endif?>
+<script src="<?php echo url("styles/".get_theme()."/js/script.js")?>"></script>
+<?php echo $afterContent?>
+</body>
+</html>

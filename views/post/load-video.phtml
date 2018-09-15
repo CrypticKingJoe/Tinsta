@@ -1,0 +1,7 @@
+<?php if($post['video']):?>
+    <video data-plyr='{ "autoplay": "true", "volume": 10 }' poster="" controls>
+        <source src="<?php echo url($post['video'])?>" type="video/mp4">
+    </video>
+<?php else:?>
+    <?php echo str_replace('feature=oembed', "feature=oembed&autoplay=1 ", $post['embed_code'])?>
+<?php endif?>
