@@ -1,0 +1,42 @@
+body{
+    background:#7D7DA8;
+    font-family: Poppins;
+    font-size: 14px;
+}
+.container{
+    max-width: 40%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background: white;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+h4{
+    width: 100%;
+    padding: 10px 0;
+    text-align: center;
+}
+ul{
+    padding: 15px 0;
+}
+.btn{
+    cursor: pointer;
+}
+label{
+    font-weight: bold;
+}
+@media (max-width: 700px) {
+    .container{
+        max-width: 90%;
+    }
+}
+
+#sidebar{
+    will-change: min-height;
+}
+
+.sidebar__inner{
+    transform: translate(0, 0); /* For browsers don't support translate3d. */
+    transform: translate3d(0, 0, 0);
+    will-change: position, transform;
+}
